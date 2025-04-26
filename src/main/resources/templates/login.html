@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Velkommen Emma, Mark & Lola Star</h1>
+
+<form th:action="@{login}" th:object="${user}" method="post">
+    <label for="email">Indtast email</label>
+    <input type="email" id="email" th:field="*{email}" required>
+    <br>
+    <label for="password">Indtast kodeord</label>
+    <input type="password" id="password" th:field="*{password}" required>
+    <br>
+    <button type="submit">Log ind</button>
+    <div th:if="${error}" th:utext="${error}"><p>Fejl</p></div>
+    <br>
+    <a th:href="@{register}">
+        <button id="Opret bruger" type="submit">Ny bruger</button>
+    </a>
+</form>
+</div>
+
+
+</body>
+</html>

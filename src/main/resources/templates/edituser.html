@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Rediger din profil</h1>
+<form th:action="@{/edituser}" th:object="${user}" th:method="post">
+    <input type="hidden" th:field="*{id}">
+    <label for="name">Navn</label><br>
+    <input id="name" type="text" th:field="*{name}"><br>
+    <label for="email">Email</label><br>
+    <input id="email" type="email" th:field="*{email}"><br>
+    <label for="birthdate">Fødselsdato</label><br>
+    <input id="birthdate" type="date" th:field="*{birthdate}"><br>
+    <label for="password">Kodeord</label><br>
+    <input id="password" type="password" th:field="*{password}"><br>
+    <button type="submit">Gem ændringer</button>
+</form>
+    <div class="alert alert-success" th:if="${succes}">
+    <strong>Success!</strong> <span th:text="${succes}"></span>
+</div>
+
+    <div class="alert alert-danger" th:if="${fejl}">
+        <strong>Fejl!</strong> <span th:text="${fejl}"></span>
+    </div>
+    <div class="BtnTilbage">
+        <a href="/welcome"><button type="submit">Tilbage</button></a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Film</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Se film</h1>
+
+    <div>
+        <p th:text="${movie}"></p>
+        <a th:href="@{'/watchmovie/' + ${movie.src}}">
+            <img th:src="@{'/files/' + ${movie.imgsrc}}" alt="Billedet kan desværre ikke vises" width="700px">
+        </a>
+        <div id="reviewListe" th:each="reviews, stat : ${reviews}" th:if="${stat.index < 10}">
+            <p th:text="${reviews}">Anmeldelser</p>
+        </div>
+
+    </div>
+    <h2>Skriv en anmeldelse af filmen</h2>
+    <a th:href="@{'/review/' + ${movie.movieId}}">
+    <button type="submit">Klik her</button>
+    </a>
+
+    <h2>Favorit?</h2>
+    <a th:if="${isFavorite}" th:href="@{/movie/removeFromFavorites/{id}(id=${movie.movieId})}">
+        <button>Fjern fra favoritter</button>
+    </a>
+
+    <a th:if="${!isFavorite}" th:href="@{/movie/addToFavorites/{id}(id=${movie.movieId})}">
+        <button>Tilføj til favoritter</button>
+    </a>
+
+
+    <div class="alert alert-success" th:if="${succes}">
+        <strong>Success!</strong> <span th:text="${succes}"></span>
+    </div>
+
+    <div th:if="${fejl}" class="alert alert-danger">
+        <strong>Error!</strong> <span th:text="${fejl}"></span>
+    </div>
+    <div class="BtnTilbage">
+        <a href="/welcome"><button type="submit">Tilbage</button></a>
+    </div>
+
+</div>
+</body>
+</html>

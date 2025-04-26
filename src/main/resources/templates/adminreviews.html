@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminReviews</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+<a th:href="@{/adminpage}">
+    <button type="button">Til adminsiden</button>
+</a>
+    <br>
+<table>
+    <thead>
+    <tr>
+        <th>Film</th>
+        <th>Titel</th>
+        <th>Indhold</th>
+        <th>Forfatter</th>
+        <th>Rating</th>
+        <th>Dato</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reviewsPaged : ${reviewsPaged}">
+        <td th:text="${reviewsPaged.movieTitle}">Film</td>
+        <td th:text="${reviewsPaged.title}">Titel</td>
+        <td th:text="${reviewsPaged.content}">Indhold</td>
+        <td th:text="${reviewsPaged.author}">Forfatter</td>
+        <td th:text="${reviewsPaged.rating}">Rating</td>
+        <td th:text="${reviewsPaged.date}">Dato</td>
+        <td><button id="adminPageBtn" th:onclick="'deleteReview(' + ${reviewsPaged.id} + ');'" >Slet anmeldelse</button></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+<a th:if="${currentPage > 1}" th:href="@{/adminreviews(page=${currentPage - 1})}">Forrige</a>
+    <text>Side </text>
+    <a th:text="${currentPage}"></a>
+    <a th:if="${currentPage < totalPages}" th:href="@{/adminreviews(page=${currentPage + 1})}">Næste</a>
+</div>
+<script>
+    function deleteReview(id) {
+        if (confirm('Er du sikker på du vil slette anmeldelsen?')) {
+            fetch('/deleteReview/' + id, {
+                method: 'DELETE'
+            }).then(response => {
+                console.log(response)
+                if (response.status === 200) {
+                    alert('Anmeldelse slettet!');
+                    window.location.replace("/adminreviews");
+                } else {
+                    alert('Kan ikke slette anmeldelse.');
+                }
+            });
+        }
+    }
+</script>
+    <br>
+<form th:action="@{/searchreviews}" method="get">
+    <input type="text" name="query" id="query" placeholder="Søg efter anmeldelse">
+    <button type="submit">Søg</button>
+</form>
+</div>
+</body>
+</html>

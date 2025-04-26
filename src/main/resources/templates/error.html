@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Så er der fejl!</h1>
+ <p th:text="${exception}">fejl</p>
+    <br>
+    <a href="/">
+    <button id="tilStart" type="submit">Gå til forsiden</button>
+    </a>
+    <h2>Eller</h2>
+    <a href="javascript:history.back()">
+        <button type="submit">Tilbage</button>
+    </a>
+</div>
+</body>
+</html>

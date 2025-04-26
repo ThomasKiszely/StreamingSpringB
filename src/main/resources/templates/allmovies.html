@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Alle film</h1>
+    <div class="searchcontainer">
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="query" id="query" placeholder="Søg efter film"><br>
+        <select name="genre" id="genre">
+            <option value="">Søg på genrer</option>
+            <option value="Action">Action</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Komedie">Komedie</option>
+            <option value="Drama">Drama</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+        </select><br>
+        <button type="submit">Søg</button>
+    </form>
+    </div>
+
+<p th:text="${user}"></p>
+    <div class="moviecontainer">
+        <div th:each="movie : ${movies}">
+            <p th:text="${movie.title}"></p>
+            <a th:href="@{'/movie/' + ${movie.movieId}}">
+                <img th:src="@{'/files/' + ${movie.imgsrc}}" alt="Billedet kan desværre ikke vises" width="100%" height="200px"/>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="BtnTilbage">
+    <a href="/welcome"><button type="submit">Tilbage</button></a>
+</div>
+</body>
+</html>

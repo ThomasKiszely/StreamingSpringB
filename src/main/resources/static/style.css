@@ -1,0 +1,141 @@
+h1 {
+    padding: 50px;
+    color: aqua;
+    background-color: black;
+    text-align: center;
+    margin-left: 500px;
+    margin-right: 500px;
+    border-radius: 100px;
+    display: block;
+}
+body {
+    background-color: aquamarine;
+}
+button {
+    width: 150px;
+    height: 50px;
+    font-family: "Comic Sans MS", serif;
+    font-size: 16px;
+    background-color: aquamarine;
+    color: deeppink;
+    border-radius: 100px;
+    border: 5px dotted black;
+    display: block;
+    padding-bottom: 10px;
+}
+button:hover {
+    background-color: deeppink;
+    color: aqua;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+a:hover {
+    color: deepskyblue;
+}
+.moviecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.moviecontainer > div {
+    width: calc(25% - 20px); /* Sikrer 4 film pr række */
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#email, #password, #birthdate, #name, #content, #title, #rating, #query {
+    width: 135px;
+    height: 30px;
+    font-family: "Comic Sans MS", serif;
+    font-size: 16px;
+    background-color: aquamarine;
+    color: deeppink;
+    border-radius: 100px;
+    border: 5px dotted black;
+    display: block;
+    padding-bottom: 10px;
+    text-align: center;
+}
+#logout {
+    position: absolute; right: 0;
+}
+.alert-success {
+    background-color: deeppink;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+.BtnTilbage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 16px;
+}
+.alert-danger {
+    background-color: deeppink;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+#genre {
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    font-family: "Comic Sans MS", serif;
+    font-size: 16px;
+    background-color: aquamarine;
+    color: deeppink;
+    border-radius: 100px;
+    border: 5px dotted black;
+    display: block;
+    text-align: center;
+}
+.searchcontainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+img {
+    object-fit: cover;
+}
+#admin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 16px;
+}
+#adminPageBtn {
+    display: block;
+    margin: auto;
+    height: 80px;
+}
+#controlUsersPageBtn {
+        width: 150px;
+        height: 50px;
+        font-family: "Comic Sans MS", serif;
+        font-size: 12px;
+        background-color: aquamarine;
+        color: deeppink;
+        border-radius: 2px;
+        border: 1px solid black;
+        display: block;
+        padding-bottom: 10px;
+}
+.adminusers {
+    margin-left: 25%;
+    justify-content: center;
+}
+
+

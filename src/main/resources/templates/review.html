@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Skriv din anmeldelse</h1>
+    <span th:text="${currentUser}"></span><br>
+<form th:action="@{/review}" th:object="${review}" th:method="post">
+    <label for="title">Titel</label><br>
+    <input type="text" id="title" th:field="*{title}"><br>
+    <input type="hidden" th:field="*{author}" th:value="${currentUser.name}">
+    <input type="hidden" th:field="*{authorId}" th:value="${currentUser.id}">
+    <label for="content">Skriv din anmeldelse</label><br>
+    <input type="text" id="content" th:field="*{content}"><br>
+    <label for="rating">Giv din rating</label><br>
+    <input type="number" id="rating" min="1" max="10" value="5" step="1" th:field="*{rating}"><br>
+    <input type="hidden" th:field="*{date}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+    <input type="hidden" th:field="*{movieId}" th:value="${movie.movieId}">
+    <input type="hidden" th:field="*{movieTitle}" th:value="${movie.title}">
+    <button type="submit">send anmeldelse</button>
+</form>
+    <div class="BtnTilbage">
+        <a href="javascript:history.back()"><button id="tilbage" type="submit">Tilbage</button></a>
+    </div>
+</div>
+</body>
+</html>

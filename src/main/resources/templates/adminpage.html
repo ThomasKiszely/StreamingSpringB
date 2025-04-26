@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <h1>Welcome, Admin!</h1>
+</div>
+<div class="container">
+<a id="admin" href="/welcome">
+    <button type="button">Gå til velkomstside</button>
+</a>
+    <a th:href="@{adminusers}">
+        <button type="button">Brugere</button>
+    </a>
+    <a th:href="@{adminreviews}">
+        <button type="button">Anmeldelser</button>
+    </a>
+<h1>Welcome</h1>
+<div th:text="${user}"></div>
+<div class="alert alert-success" th:if="${succes}">
+    <strong>Success!</strong> <span th:text="${succes}"></span>
+</div>
+
+<div th:if="${fejl}" class="alert alert-danger">
+    <strong>Error!</strong> <span th:text="${fejl}"></span>
+</div>
+</div>
+</body>
+</html>

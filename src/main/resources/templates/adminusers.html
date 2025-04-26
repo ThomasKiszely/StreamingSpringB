@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminUsers</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+<a id="adminPageBtn" th:href="@{adminpage}">
+  <button type="button">Til adminside</button>
+  </a>
+
+<table>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Role</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="users : ${users}">
+
+    <td th:text="${users.name}">Username</td>
+    <td th:text="${users.email}">Email</td>
+    <td>
+    <a th:href="@{'edituserAdmin/' + ${users.id}}">
+      <button id="controlUsersPageBtn">Rediger bruger</button>
+  </a>
+    </td>
+    <td th:if="${users.role} == 'ROLE_ADMIN'">
+      <a th:href="@{adminpage/removeadminrights/{id}(id=${users.id})}">
+        <button id="controlUsersPageBtn">Fjern adminrettigheder</button>
+      </a>
+    </td>
+    <td th:if="${users.role} == 'ROLE_USER'">
+      <button id="controlUsersPageBtn" th:onclick="'deleteUser(' + ${users.id} + ');'">Slet bruger</button>
+      </td>
+      <td th:if="${users.role} == 'ROLE_USER'">
+        <a th:href="@{adminpage/giveadminrights/{id}(id=${users.id})}">
+        <button id="controlUsersPageBtn">Giv adminrettigheder</button>
+        </a>
+      </td>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div>
+  <a th:if="${currentPage > 1}" th:href="@{/adminusers(page=${currentPage - 1})}">Forrige</a>
+  <text>Side </text>
+  <a th:text="${currentPage}"></a>
+  <a th:if="${currentPage < totalPages}" th:href="@{/adminusers(page=${currentPage + 1})}">Næste</a>
+</div>
+<script>
+  function deleteUser(id) {
+    if (confirm('Er du sikker på du vil slette bruger?')) {
+      fetch('/delete/' + id, {
+        method: 'DELETE'
+      }).then(response => {
+        console.log(response)
+        if (response.status === 200) {
+          alert('Bruger slettet!');
+          window.location.replace("/adminpage");
+        } else {
+          alert('Kan ikke slette bruger.');
+        }
+      });
+    }
+  }
+</script>
+<div class="alert alert-success" th:if="${succes}">
+  <strong>Success!</strong> <span th:text="${succes}"></span>
+</div>
+
+<div th:if="${fejl}" class="alert alert-danger">
+  <strong>Error!</strong> <span th:text="${fejl}"></span>
+</div>
+</a>
+<br>
+
+<form id="adminquery" th:action="@{/searchForUser}" method="get">
+  <input type="text" name="query" id="query" placeholder="Søg efter bruger"><br>
+  <button type="submit">Søg</button>
+
+</form>
+</div>
+</body>
+</html>

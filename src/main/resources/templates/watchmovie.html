@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Now watching</title>
+</head>
+<body>
+<video width="1080" controls>
+    <source th:src="@{/files/{filename}(filename=${moviePath})}" type="video/mp4"/>
+</video>
+
+</body>
+</html>
