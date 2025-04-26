@@ -43,9 +43,9 @@ public class UserService {
         }
         return null;
     }
-//    public List<User> getAllUsers(){
-//        return userRepository.getAllUsers();
-//    }
+    public List<User> getAllUsers(){
+        return userRepository.getAllUsers();
+    }
     public boolean deleteUser(int id) {
         return userRepository.deleteUser(id);
     }
@@ -56,7 +56,7 @@ public class UserService {
         return userRepository.removeAdminRights(id);
     }
     public User getUser(int id) {
-        List<User> users = userRepository.getAllUsers();
+        List<User> users = getAllUsers();
         for (User user : users) {
             if (user.getId() == id) {
                 return user;
