@@ -32,9 +32,9 @@ import java.util.List;
 public class StreamingController {
 
     @Autowired
-    private UserService userService = new UserService();
+    private UserService userService;
     @Autowired
-    private MovieService movieservice = new MovieService();
+    private MovieService movieservice;
 
     @GetMapping("/login")
     public String loginPage(Model model) {
@@ -117,7 +117,11 @@ public class StreamingController {
             return "error";
         }
         User user = (User) session.getAttribute("currentUser");
-        Movie movie = movieservice.getMovie(id); // Get the movie once
+        Movie movie = movieservice.getMovie(id);
+        if (movie == null) {
+            model.addAttribute("exception", "Film ikke fundet");
+            return "error";
+        }
         List<Movie> favorites = movieservice.favorites(user.getId());
         model.addAttribute("movie", movie);
         model.addAttribute("imgsrc", movie.getImgsrc());

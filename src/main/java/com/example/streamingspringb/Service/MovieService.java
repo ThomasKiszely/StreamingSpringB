@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -18,7 +19,11 @@ public class MovieService {
         return movieRepository.getMovies();
     }
     public Movie getMovie(int id) {
-        return movieRepository.getMovie(id);
+        Optional<Movie> movie = movieRepository.getMovie(id);
+        if (movie.isPresent()) {
+            return (Movie) movie.get();
+        }
+        return null;
     }
     public Boolean createReview(Review review) {
         if (review != null) {

@@ -39,8 +39,9 @@ a:hover {
     overflow: hidden;
 }
 
-.moviecontainer > div {
+.moviecontainer div {
     width: calc(25% - 20px); /* Sikrer 4 film pr række */
+    min-width: 300px;
 }
 .container {
     display: flex;

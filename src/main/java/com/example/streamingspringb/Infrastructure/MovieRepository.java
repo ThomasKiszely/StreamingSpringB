@@ -2,14 +2,13 @@ package com.example.streamingspringb.Infrastructure;
 
 import com.example.streamingspringb.Model.Movie;
 import com.example.streamingspringb.Model.Review;
-import com.example.streamingspringb.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MovieRepository {
@@ -21,10 +20,15 @@ public class MovieRepository {
         String sql = "select * from movie";
         return jdbcTemplate.query(sql, ((rs, rowNum) -> new Movie(rs.getInt("movieid"), rs.getString("title"), rs.getString("director"), rs.getDate("releasedate"), rs.getString("genre"), rs.getString("description"), rs.getInt("rating"), rs.getString("src"), rs.getString("imgsrc"))));
     }
-    public Movie getMovie(int id) {
-        String sql = "select * from movie where movieid = ?";
-        Movie movie = jdbcTemplate.queryForObject(sql, ((rs, rowNum) -> new Movie(rs.getInt("movieid"), rs.getString("title"), rs.getString("director"), rs.getDate("releasedate"), rs.getString("genre"), rs.getString("description"), rs.getInt("rating"), rs.getString("src"), rs.getString("imgsrc"))), id);
-        return movie;
+    public Optional<Movie> getMovie(int id) {
+        try {
+            String sql = "select * from movie where movieid = ?";
+            Movie movie = jdbcTemplate.queryForObject(sql, ((rs, rowNum) -> new Movie(rs.getInt("movieid"), rs.getString("title"), rs.getString("director"), rs.getDate("releasedate"), rs.getString("genre"), rs.getString("description"), rs.getInt("rating"), rs.getString("src"), rs.getString("imgsrc"))), id);
+            return Optional.of(movie);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
     public Boolean createReview(Review review) {
         String sql = "INSERT INTO `streamingtjeneste`.`review` (`title`, `author`, `authorid`, `content`, `rating`, `date`, `fkmovie`) VALUES (?, ?, ?, ?, ?, ?, ?);";
